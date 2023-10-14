@@ -1,0 +1,8 @@
+version: '3'
+services:
+  test:
+    container_name: test
+    build: ./
+    ports:
+      - "3000:3000"
+        #    command: sleep 1h
