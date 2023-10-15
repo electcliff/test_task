@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: someapp
+spec:
+  replicas: 3
+  selector:
+      matchLabels:
+        app: test
+  template:
+    metadata:
+      labels:
+        app: test
+    spec:
+      containers:
+        - name: testapp
+          image: electcliff/job-test:latest
+          ports:
+            - containerPort: 3000
+          command: ['node', '/app/index.js']
+          volumeMounts:
+            - name: localpath
+              mountPath: /app
+      volumes:
+        - name: localpath
+          persistentVolumeClaim:
+            claimName: test-pvc
